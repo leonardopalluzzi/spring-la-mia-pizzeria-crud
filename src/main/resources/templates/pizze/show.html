@@ -12,7 +12,7 @@
     </header>
     <th:block th:if="${pizza != null}">
         <th:block
-            th:replace="~{fragments/jumbo :: jumbo(${pizza.getImage()}, ${pizza.getName()}, ${pizza.getDescription()}, ${pizza.getId()})}">
+            th:replace="~{fragments/jumbo :: jumbo(${pizza.getImage()}, ${pizza.getName()}, ${pizza.getDescription()}, ${pizza.getId()}, false)}">
         </th:block>
     </th:block>
 
