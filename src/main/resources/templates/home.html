@@ -12,7 +12,7 @@
     </header>
     <th:block th:if="${pizzas.size() > 0}">
         <th:block
-            th:replace="~{fragments/jumbo :: jumbo(${pizzas[0].getImage()}, ${pizzas[0].getName()}, ${pizzas[0].getDescription()}, ${pizzas[0].getId()}, true)}">
+            th:replace="~{fragments/jumbo :: jumbo(${pizzas[0].getImage()}, ${pizzas[0].getName()}, ${pizzas[0].getDescription()}, ${pizzas[0].getId()}, true, 'This month sale')}">
         </th:block>
     </th:block>
 
