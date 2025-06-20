@@ -7,14 +7,28 @@
 </head>
 
 <body>
+    <header>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </header>
+    <th:block th:if="${pizza != null}">
+        <th:block
+            th:replace="~{fragments/jumbo :: jumbo(${pizza.getImage()}, ${pizza.getName()}, ${pizza.getDescription()}, ${pizza.getId()})}">
+        </th:block>
+    </th:block>
+
+    <th:block th:unless="${pizza != null}">
+
+        <h1></h1>
+    </th:block>
     <div th:if="${pizza != null}">
-        <h1 th:each="pizza : ${pizzas}">[[${pizza}]]</h1>
+        <h1>[[${pizza}]]</h1>
     </div>
     <div th:unless="${pizza != null}">
         <h1>This Pizza is not available</h1>
     </div>
 
 
+    <th:block th:fragment="~{fragments/footer :: footer}"></th:block>
 
     <div th:replace="~{fragments/resources :: scripts}"></div>
 

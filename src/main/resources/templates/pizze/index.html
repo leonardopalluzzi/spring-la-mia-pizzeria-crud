@@ -28,7 +28,7 @@
                     <div class="row row-cols-1 row-cols-md-3 gy-4">
                         <th:block th:each="pizza : ${pizzas}" th:object="${pizza}">
                             <div class="col"
-                                th:insert="~{fragments/card :: card(*{getImage()}, *{getName()}, *{getDescription()}, *{getPrice()})}">
+                                th:insert="~{fragments/card :: card(*{getImage()}, *{getName()}, *{getDescription()}, *{getPrice()}, *{getId()})}">
                             </div>
                         </th:block>
                     </div>
@@ -40,6 +40,8 @@
             </div>
         </section>
     </main>
+    <th:block th:fragment="~{fragments/footer :: footer}"></th:block>
+
     <div th:replace="~{fragments/resources :: scripts}"></div>
 
 </body>
