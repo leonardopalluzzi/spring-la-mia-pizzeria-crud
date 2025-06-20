@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="~{fragments/resources :: headTags}"></div>
+    <title>Pizzas</title>
+</head>
+
+<body>
+    <header>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </header>
+    <th:block th:if="${pizzas.size() > 0}">
+        <th:block
+            th:replace="~{fragments/jumbo :: jumbo(${pizzas[0].getImage()}, ${pizzas[0].getName()}, ${pizzas[0].getDescription()}, ${pizzas[0].getId()})}">
+        </th:block>
+    </th:block>
+
+    <th:block th:unless="${pizzas.size() > 0}">
+        <h1></h1>
+    </th:block>
+
+    <main>
+        <!-- banner about us  -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <h2>Ristorante bello</h2>
+                        <img src="" alt="resturant image">
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nemo praesentium non nobis
+                            ex blanditiis reiciendis dignissimos? Debitis, accusantium eligendi?
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+        <!-- banner cta al menu  -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row row-cols-5">
+                            <div class="col" th:each="pizza : ${pizzas}" th:object="${pizza}">
+                                <img src="@{*{getImage()}}" alt="pizza img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h4 for="">Take a look at our menu!</h4>
+                        <a class="btn btn-primary" th:href="@{/menu?page=0&limit=5}">Menu</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- info sul ristorante  -->
+        <section>
+            <div class="container">
+
+
+
+
+            </div>
+        </section>
+    </main>
+
+    <th:block th:fragment="~{fragments/footer :: footer}"></th:block>
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+
+</body>
+
+</html>

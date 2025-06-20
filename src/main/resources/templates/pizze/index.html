@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="~{fragments/resources :: headTags}"></div>
+    <title>Pizzas</title>
+</head>
+
+<body>
+    <header>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </header>
+    <th:block th:if="${pizzas.size() > 0}">
+        <th:block
+            th:replace="~{fragments/jumbo :: jumbo(${pizzas[0].getImage()}, ${pizzas[0].getName()}, ${pizzas[0].getDescription()}, ${pizzas[0].getId()})}">
+        </th:block>
+    </th:block>
+
+    <th:block th:unless="${pizzas.size() > 0}">
+
+        <h1></h1>
+    </th:block>
+
+    <main>
+        <section>
+            <div class="container">
+                <div th:if="${pizzas.size() > 0}">
+                    <div class="row row-cols-1 row-cols-md-3 gy-4">
+                        <th:block th:each="pizza : ${pizzas}" th:object="${pizza}">
+                            <div class="col"
+                                th:insert="~{fragments/card :: card(*{getImage()}, *{getName()}, *{getDescription()}, *{getPrice()})}">
+                            </div>
+                        </th:block>
+                    </div>
+
+                </div>
+                <div th:unless="${pizzas.size() > 0}">
+                    <h1>No pizzas found</h1>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+
+</body>
+
+</html>
