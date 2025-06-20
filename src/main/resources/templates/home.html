@@ -22,37 +22,42 @@
 
     <main>
         <!-- banner about us  -->
-        <section class="my-5">
+        <section class="home_section about">
             <div class="container">
                 <div class="row">
                     <div class="col-4">
-                        <h2>Ristorante bello</h2>
-                        <img src="" alt="resturant image">
+                        <h2>Pizzeria Roma, dal 1800</h2>
+                        <img class="w-100 rounded-5"
+                            th:src="@{https://as1.ftcdn.net/v2/jpg/03/19/71/38/1000_F_319713812_6J60pb0X8yf2VzlajNvDzxUJUf6c20yy.jpg}"
+                            alt="resturant image">
                     </div>
-                    <div class="col-8">
+                    <div class="col-8 p-5">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nemo praesentium non nobis
-                            ex blanditiis reiciendis dignissimos? Debitis, accusantium eligendi?
+                            pizzeria vecchia figa buona economica non turistica ma na roba che lascia perde vieni a
+                            mangiare qui da noi fratellino chicco di riso
                         </p>
                     </div>
                 </div>
             </div>
         </section>
         <!-- banner cta al menu  -->
-        <section class="my-5">
+        <section class="home_section menu_cta">
             <div class="container">
                 <div class="row">
+                    <div
+                        class="col-4 d-flex aling-item-center justify-content-center flex-column text-center border p-3 rounded-5">
+                        <h4 for="">Take a look at our menu!</h4>
+                        <i class="bi bi-fork-knife fs-1"></i> <br>
+                        <a class="btn btn-primary" th:href="@{/menu?page=0&limit=5}">Menu</a>
+                    </div>
                     <div class="col-8">
-                        <div class="row row-cols-5">
-                            <div class="col" th:each="pizza : ${pizzas}" th:object="${pizza}">
-                                <img src="@{*{getImage()}}" alt="pizza img">
+                        <div class="row row-cols-5 align-item-center justify-content-center">
+                            <div class="col-1" th:each="pizza : ${pizzas}" th:object="${pizza}">
+                                <img class="rounded rounded-5" th:src="@{*{getImage()}}" th:alt="*{getName()}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 text-center">
-                        <h4 for="">Take a look at our menu!</h4>
-                        <a class="btn btn-primary" th:href="@{/menu?page=0&limit=5}">Menu</a>
-                    </div>
+
                 </div>
 
 
@@ -60,18 +65,21 @@
         </section>
 
         <!-- info sul ristorante  -->
-        <section class="my-5">
+        <section class="home_section hoven">
             <div class="container">
                 <div class="row">
                     <div class="col-4">
-                        <h2>Ristorante bello</h2>
-                        <img src="" alt="resturant image">
+                        <h2>Forno a legna</h2>
+                        <img class="w-100 rounded-5"
+                            th:src="@{https://t4.ftcdn.net/jpg/01/24/44/83/240_F_124448337_93POEU9DoEEk1cHzet8ZLtoQLGgmnSXn.jpg}"
+                            alt="resturant image">
+
                     </div>
                     <div class="col-8">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nemo praesentium non nobis
-                            ex blanditiis reiciendis dignissimos? Debitis, accusantium eligendi?
+                        <p class="p-5">
+                            Forno a legna tradizionale, seguiamo la tradizione siamo attenti alla pulizia dacce i sordi
                         </p>
+
                     </div>
                 </div>
             </div>

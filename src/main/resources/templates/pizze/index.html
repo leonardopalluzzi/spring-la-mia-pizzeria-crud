@@ -12,7 +12,7 @@
     </header>
     <th:block th:if="${pizzas.size() > 0}">
         <th:block
-            th:replace="~{fragments/jumbo :: jumbo(${pizzas[0].getImage()}, Menu, 'Discover our pizzas', ${pizzas[0].getId()}, false, 'Our Menu')}">
+            th:replace="~{fragments/jumbo :: jumbo('https://as1.ftcdn.net/v2/jpg/03/19/71/38/1000_F_319713812_6J60pb0X8yf2VzlajNvDzxUJUf6c20yy.jpg', Menu, 'Discover our pizzas', ${pizzas[0].getId()}, false, 'Our Menu')}">
         </th:block>
     </th:block>
 
@@ -22,7 +22,7 @@
     </th:block>
 
     <main>
-        <section>
+        <section class="my-5">
             <div class="container">
                 <div th:if="${pizzas.size() > 0}">
                     <div class="row row-cols-1 row-cols-md-3 gy-4">
