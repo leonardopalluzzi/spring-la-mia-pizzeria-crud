@@ -22,6 +22,23 @@
     </th:block>
 
     <main>
+        <section class="search_filter my-5">
+            <div class="container">
+                <form th:action="@{/menu/results}" th:method="GET">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Search for a pizza</label>
+                        <input type="text" class="form-control" name="name" id="" aria-describedby="helpId"
+                            placeholder="margherita" required />
+                        <small id="helpId" class="form-text text-muted">Search for a pizza by name</small>
+                        <input type="hidden" name="page" value="0">
+                        <input type="hidden" name="limit" value="10">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a class="btn btn-warning" th:href="@{/menu?page=0&limit=10}">Reset Filters</a>
+                </form>
+            </div>
+
+        </section>
         <section class="my-5">
             <div class="container">
                 <div th:if="${pizzas.size() > 0}">

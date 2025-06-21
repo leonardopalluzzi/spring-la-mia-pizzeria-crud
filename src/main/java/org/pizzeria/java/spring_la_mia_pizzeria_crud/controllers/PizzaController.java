@@ -30,6 +30,16 @@ public class PizzaController {
         return "pizze/index";
     }
 
+    @GetMapping("/results")
+    public String index(Model model, @RequestParam(name = "page") int page,
+            @RequestParam(name = "limit") int limit, @RequestParam(name = "name") String name) {
+        Pageable pagination = PageRequest.of(page, limit);
+
+        Page<Pizza> pizzas = repo.findAllByNameContaining(pagination, name);
+        model.addAttribute("pizzas", pizzas.toList());
+        return "pizze/index";
+    }
+
     @GetMapping("/pizza/{id}")
     public String show(@PathVariable("id") int id, Model model) {
 
