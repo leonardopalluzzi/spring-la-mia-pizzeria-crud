@@ -22,9 +22,14 @@
     </th:block>
 
     <main>
+        <section>
+            <div class="container my-5 d-flex align-item-center justify-content-end">
+                <a th:href="@{/menu/pizza/create}" class="btn btn-primary">Add a new pizza</a>
+            </div>
+        </section>
         <section class="search_filter my-5">
             <div class="container">
-                <form th:action="@{/menu/results}" th:method="GET">
+                <form th:action="@{/dashboard/results}" th:method="GET">
                     <div class="mb-3">
                         <label for="" class="form-label">Search for a pizza</label>
                         <input type="text" class="form-control" name="name" id="" aria-describedby="helpId"
@@ -42,13 +47,49 @@
         <section class="my-5">
             <div class="container">
                 <div th:if="${pizzas.toList().size() > 0}">
-                    <div class="row row-cols-1 row-cols-md-3 gy-4">
-                        <th:block th:each="pizza : ${pizzas.toList()}" th:object="${pizza}">
-                            <div class="col"
-                                th:insert="~{fragments/card :: card(*{getImage()}, *{getName()}, *{getDescription()}, *{getPrice()}, *{getId()})}">
-                            </div>
-                        </th:block>
-                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="pizza : ${pizzas.toList()}" th:object="${pizza}">
+                                <td class="w-50">
+                                    <a th:href="@{/menu/pizza/{id}(id=*{getId()})}">
+                                        <img class="w-50 rounded-5" th:src="@{*{getImage()}}" alt="">
+                                    </a>
+
+                                </td>
+                                <td>
+                                    [[*{getName()}]]
+                                </td>
+                                <td>
+                                    [[*{getPrice()}]]
+                                </td>
+
+                                <td>
+                                    [[*{getDescription()}]]
+                                </td>
+                                <td>
+                                    <div class="row row-cols-2">
+                                        <div class="col">
+                                            <button class="btn btn-warning"><i class="bi bi-pen-fill"></i></button>
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
 
                 </div>
                 <div th:unless="${pizzas.toList().size() > 0}">
