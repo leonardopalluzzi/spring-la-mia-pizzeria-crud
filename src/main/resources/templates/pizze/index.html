@@ -10,18 +10,23 @@
     <header>
         <div th:replace="~{fragments/navbar :: navbar}"></div>
     </header>
-    <th:block th:if="${pizzas.size() > 0}">
+    <th:block th:if="${pizzas.toList().size() > 0}">
         <th:block
-            th:replace="~{fragments/jumbo :: jumbo('https://as1.ftcdn.net/v2/jpg/03/19/71/38/1000_F_319713812_6J60pb0X8yf2VzlajNvDzxUJUf6c20yy.jpg', Menu, 'Discover our pizzas', ${pizzas[0].getId()}, false, 'Our Menu')}">
+            th:replace="~{fragments/jumbo :: jumbo('https://as1.ftcdn.net/v2/jpg/03/19/71/38/1000_F_319713812_6J60pb0X8yf2VzlajNvDzxUJUf6c20yy.jpg', Menu, 'Discover our pizzas', ${pizzas.toList()[0].getId()}, false, 'Our Menu')}">
         </th:block>
     </th:block>
 
-    <th:block th:unless="${pizzas.size() > 0}">
+    <th:block th:unless="${pizzas.toList().size() > 0}">
 
         <h1></h1>
     </th:block>
 
     <main>
+        <section>
+            <div class="container my-5 d-flex align-item-center justify-content-end">
+                <a th:href="@{/menu/pizza/create}" class="btn btn-primary">Add a new pizza</a>
+            </div>
+        </section>
         <section class="search_filter my-5">
             <div class="container">
                 <form th:action="@{/menu/results}" th:method="GET">
@@ -41,9 +46,9 @@
         </section>
         <section class="my-5">
             <div class="container">
-                <div th:if="${pizzas.size() > 0}">
+                <div th:if="${pizzas.toList().size() > 0}">
                     <div class="row row-cols-1 row-cols-md-3 gy-4">
-                        <th:block th:each="pizza : ${pizzas}" th:object="${pizza}">
+                        <th:block th:each="pizza : ${pizzas.toList()}" th:object="${pizza}">
                             <div class="col"
                                 th:insert="~{fragments/card :: card(*{getImage()}, *{getName()}, *{getDescription()}, *{getPrice()}, *{getId()})}">
                             </div>
@@ -51,9 +56,23 @@
                     </div>
 
                 </div>
-                <div th:unless="${pizzas.size() > 0}">
+                <div th:unless="${pizzas.toList().size() > 0}">
                     <h1>No pizzas found</h1>
                 </div>
+                <nav class="w-100 d-flex align-item-center justify-content-center mt-5">
+                    <ul class="pagination">
+                        <li class="page-item" th:if="${pizzas.hasPrevious()}">
+                            <a class="page-link" th:href="@{${prevPageLink}}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:if="${pizzas.hasNext()}">
+                            <a class="page-link" th:href="@{${nextPageLink}}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </section>
     </main>

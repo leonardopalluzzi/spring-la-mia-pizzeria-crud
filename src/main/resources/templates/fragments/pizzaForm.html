@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="pizzaForm(newPizza)">
+    <form action="" th:action="@{/menu/pizza/create}" method="POST" th:object="${newPizza}">
+        <!-- name  -->
+        <div class="mb-3">
+            <label for="" class="form-label">Name</label>
+            <input th:field="*{name}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                placeholder="Marinara" />
+            <small id="helpId" class="form-text text-muted">Insert the name of the new pizza</small>
+        </div>
+
+        <!-- price  -->
+        <div class="mb-3">
+            <label for="" class="form-label">Price</label>
+            <input th:field="*{price}" type="number" class="form-control" name="" id="" aria-describedby="helpId"
+                placeholder="12.50" />
+            <small id="helpId" class="form-text text-muted">Insert the price of the new pizza</small>
+        </div>
+
+        <!-- image  -->
+        <div class="mb-3">
+            <label for="" class="form-label">Image</label>
+            <input th:field="*{image}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                placeholder="imgurl.jpg" />
+            <small id="helpId" class="form-text text-muted">Upload an image for the new pizza</small>
+        </div>
+
+        <!-- description  -->
+        <div class="mb-3">
+            <label for="" class="form-label">Description</label>
+            <textarea th:field="*{description}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                placeholder="New cool pizza"></textarea>
+            <small id="helpId" class="form-text text-muted">Insert a description fo the new pizza</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add pizza</button>
+
+    </form>
+</th:block>

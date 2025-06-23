@@ -8,10 +8,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/menu")
@@ -21,22 +26,58 @@ public class PizzaController {
     PizzaRepository repo;
 
     @GetMapping
-    public String index(Model model, @RequestParam(name = "page") int page,
-            @RequestParam(name = "limit") int limit) {
+    public String index(Model model, @RequestParam(name = "page", required = false) Integer page,
+            @RequestParam(name = "limit", required = false) Integer limit) {
+
+        String nextPageLink = "";
+        String prevPageLink = "";
+
+        if (page == null) {
+            page = 0;
+        }
+        if (limit == null) {
+            limit = 10;
+        }
         Pageable pagination = PageRequest.of(page, limit);
 
         Page<Pizza> pizzas = repo.findAll(pagination);
-        model.addAttribute("pizzas", pizzas.toList());
+
+        if (pizzas.hasNext()) {
+            nextPageLink = "/menu?page=" + (page + 1) + "&limit=10";
+        }
+        if (pizzas.hasPrevious()) {
+            prevPageLink = "/menu?page=" + (page - 1) + "&limit=10";
+        }
+
+        model.addAttribute("pizzas", pizzas);
+        model.addAttribute("nextPageLink", nextPageLink);
+        model.addAttribute("prevPageLink", prevPageLink);
+
         return "pizze/index";
     }
 
     @GetMapping("/results")
     public String index(Model model, @RequestParam(name = "page") int page,
             @RequestParam(name = "limit") int limit, @RequestParam(name = "name") String name) {
+
+        String nextPageLink = "";
+        String prevPageLink = "";
+
         Pageable pagination = PageRequest.of(page, limit);
 
         Page<Pizza> pizzas = repo.findAllByNameContaining(pagination, name);
-        model.addAttribute("pizzas", pizzas.toList());
+
+        if (pizzas.hasNext()) {
+            nextPageLink = "/menu?page=" + (page + 1) + "&limit=10";
+        }
+        if (pizzas.hasPrevious()) {
+            prevPageLink = "/menu?page=" + (page - 1) + "&limit=10";
+        }
+
+        model.addAttribute("pizzas", pizzas);
+        model.addAttribute("nextPageLink", nextPageLink);
+        model.addAttribute("prevPageLink", prevPageLink);
+
         return "pizze/index";
     }
 
@@ -46,6 +87,25 @@ public class PizzaController {
         Pizza pizza = repo.findById(id).get();
         model.addAttribute("pizza", pizza);
         return "pizze/show";
+    }
+
+    @GetMapping("/pizza/create")
+    public String create(Model model) {
+
+        model.addAttribute("newPizza", new Pizza());
+        return "pizze/create";
+    }
+
+    @PostMapping("/pizza/create")
+    public String store(@Valid @ModelAttribute("newPizza") Pizza newPizza, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "pizze/create";
+        }
+
+        repo.save(newPizza);
+
+        return "redirect:/menu";
     }
 
 }
