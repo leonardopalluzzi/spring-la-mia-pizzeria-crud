@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +22,8 @@ public class Pizza {
     private Integer id;
 
     @NotBlank(message = "Name cannot be blank")
+    @Min(value = 4, message = "Name cannot be blank")
+    @Max(value = 20, message = "Name must be shorter then 20 characters")
     private String name;
 
     @Lob
@@ -31,7 +34,7 @@ public class Pizza {
     private String image;
 
     @NotNull
-    @Min(value = 0, message = "Price cannot be negative")
+    @Min(value = 1, message = "Price cannot be negative")
     private BigDecimal price;
 
     public Pizza() {
