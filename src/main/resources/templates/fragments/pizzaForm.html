@@ -33,7 +33,7 @@
             <label for="" class="form-label">Image</label>
             <input th:field="*{image}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
                 placeholder="imgurl.jpg" th:errorClass="is-invalid" />
-            <small th:unless="${#fields.hasErrors('image')}" id="helpId" class="form-text text-muted">Insert the price
+            <small th:unless="${#fields.hasErrors('image')}" id="helpId" class="form-text text-muted">Insert the image
                 of
                 the
                 new pizza</small>
@@ -47,7 +47,7 @@
             <input th:field="*{description}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
                 placeholder="very cool pizza" th:errorClass="is-invalid" />
             <small th:unless="${#fields.hasErrors('description')}" id="helpId" class="form-text text-muted">Insert the
-                price
+                description
                 of
                 the
                 new pizza</small>
