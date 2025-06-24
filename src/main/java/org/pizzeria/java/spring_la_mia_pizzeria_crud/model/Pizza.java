@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pizzas")
@@ -22,8 +23,7 @@ public class Pizza {
     private Integer id;
 
     @NotBlank(message = "Name cannot be blank")
-    @Min(value = 4, message = "Name cannot be blank")
-    @Max(value = 20, message = "Name must be shorter then 20 characters")
+    @Size(min = 4, max = 20, message = "Name must be between 4 and 20 characters")
     private String name;
 
     @Lob

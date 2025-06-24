@@ -24,7 +24,7 @@
     <main>
         <section>
             <div class="container my-5 d-flex align-item-center justify-content-end">
-                <a th:href="@{/menu/pizza/create}" class="btn btn-primary">Add a new pizza</a>
+                <a th:href="@{/dashboard/pizza/create}" class="btn btn-primary">Add a new pizza</a>
             </div>
         </section>
         <section class="search_filter my-5">
@@ -76,14 +76,15 @@
                                     [[*{getDescription()}]]
                                 </td>
                                 <td>
-                                    <div class="row row-cols-2">
+                                    <form class="row row-cols-2"
+                                        th:action="@{/dashboard/edit/{pizzaId}(pizzaId=*{getId()})}">
                                         <div class="col">
                                             <button class="btn btn-warning"><i class="bi bi-pen-fill"></i></button>
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </td>
 
                             </tr>

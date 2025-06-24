@@ -89,23 +89,4 @@ public class PizzaController {
         return "pizze/show";
     }
 
-    @GetMapping("/pizza/create")
-    public String create(Model model) {
-
-        model.addAttribute("newPizza", new Pizza());
-        return "pizze/create";
-    }
-
-    @PostMapping("/pizza/create")
-    public String store(@Valid @ModelAttribute("newPizza") Pizza newPizza, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "pizze/create";
-        }
-
-        repo.save(newPizza);
-
-        return "redirect:/menu";
-    }
-
 }
