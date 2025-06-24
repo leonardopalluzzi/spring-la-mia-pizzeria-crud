@@ -32,7 +32,7 @@
         <div class="mb-3">
             <label for="" class="form-label">Image</label>
             <input th:field="*{image}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                placeholder="12.50" th:errorClass="is-invalid" />
+                placeholder="imgurl.jpg" th:errorClass="is-invalid" />
             <small th:unless="${#fields.hasErrors('image')}" id="helpId" class="form-text text-muted">Insert the price
                 of
                 the
@@ -45,7 +45,7 @@
         <div class="mb-3">
             <label for="" class="form-label">Description</label>
             <input th:field="*{description}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                placeholder="12.50" th:errorClass="is-invalid" />
+                placeholder="very cool pizza" th:errorClass="is-invalid" />
             <small th:unless="${#fields.hasErrors('description')}" id="helpId" class="form-text text-muted">Insert the
                 price
                 of
@@ -56,7 +56,7 @@
                 class="form-text text-muted invalid-feedback">[[${err}]]</small>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add pizza</button>
+        <button type="submit" class="btn btn-primary">Save</button>
 
     </form>
 </th:block>

@@ -23,7 +23,7 @@ public class Pizza {
     private Integer id;
 
     @NotBlank(message = "Name cannot be blank")
-    @Size(min = 4, max = 20, message = "Name must be between 4 and 20 characters")
+    @Size(min = 4, max = 100, message = "Name must be between 4 and 100 characters")
     private String name;
 
     @Lob

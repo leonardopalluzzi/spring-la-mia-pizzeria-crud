@@ -117,7 +117,7 @@ public class DashboardController {
     public String update(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "/dashboard/edit";
+            return "pizze/edit";
         }
 
         repo.save(pizza);
