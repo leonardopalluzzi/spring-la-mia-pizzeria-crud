@@ -76,21 +76,56 @@
                                     [[*{getDescription()}]]
                                 </td>
                                 <td>
-                                    <form class="row row-cols-2"
-                                        th:action="@{/dashboard/edit/{pizzaId}(pizzaId=*{getId()})}">
+                                    <div class="row row-cols-2">
+                                        <form class="col" th:action="@{/dashboard/edit/{pizzaId}(pizzaId=*{getId()})}">
+                                            <div>
+                                                <button class="btn btn-warning"><i class="bi bi-pen-fill"></i></button>
+                                            </div>
+                                        </form>
+                                        <!-- Button trigger modal -->
                                         <div class="col">
-                                            <button class="btn btn-warning"><i class="bi bi-pen-fill"></i></button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                th:data-bs-target="'#modal-' + ${pizza.getId()}">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
                                         </div>
-                                        <div class="col">
-                                            <button class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                    </div>
+
+
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" th:id="'modal-' + ${pizza.getId()}" tabindex="-1"
+                                        aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="modalLabel">Confirm deleting
+                                                        operation</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want
+                                                    to delete the pizza: [[*{getName()}]]?
+                                                    Press delete to confirm, press close to exit without confirming
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <form th:action="@{/dashboard/delete/{id}(id=*{getId()})}"
+                                                        method="POST">
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </td>
 
                             </tr>
                         </tbody>
                     </table>
-
 
                 </div>
                 <div th:unless="${pizzas.toList().size() > 0}">
