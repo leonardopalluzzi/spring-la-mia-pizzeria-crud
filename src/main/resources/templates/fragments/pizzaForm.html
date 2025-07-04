@@ -8,9 +8,11 @@
             <label for="" class="form-label">Name</label>
             <input th:field="*{name}" type="text" class="form-control" name="" id="" aria-describedby="helpId"
                 placeholder="Marinara" th:errorClass="is-invalid" />
-            <small th:unless="${#fields.hasErrors('name')}" id="helpId" class="form-text text-muted">Insert the name of
+            <small th:unless="${#fields.hasErrors('name')}" id="helpId" class="form-text text-muted">
+                Insert the name of
                 the
-                new pizza</small>
+                new pizza
+            </small>
             <small th:each="err : ${#fields.errors('name')}" th:text="${err}" th:if="${#fields.hasErrors('name')}"
                 id="helpId" class="form-text text-muted invalid-feedback">[[${err}]]</small>
         </div>
