@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="pizzaForm(pizza, endpoint)">
-    <form action="" th:action="@{${endpoint}}" method="POST" th:object="${pizza}">
+    <form th:action="@{${endpoint}}" method="POST" th:object="${pizza}">
         <!-- name  -->
         <div class="mb-3">
             <label for="" class="form-label">Name</label>
